@@ -13,6 +13,7 @@ const Register = () => {
             const token = await registerUser(username, password);
             // setting token into global storage so it can be pulled throughout the app
            localStorage.setItem("token", token);
+           console.log("this is token in register", token)
            } catch (error) {
             console.error(error)
            }

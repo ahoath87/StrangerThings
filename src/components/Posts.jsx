@@ -4,6 +4,7 @@ import "./UserPosts.css";
 
 
 const Posts = ({ allPosts}) => {
+  // const allPosts = props
   console.log(allPosts)
     return (
         <div className="user-posts">

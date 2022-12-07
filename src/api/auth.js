@@ -2,6 +2,7 @@ const cohort = "2211-FTB-WEB-FT";
 
 //registering a user to our API
 //sends response and shows a token in an object
+// this is from POST wrong wrong
 export const registerUser = async (username, password) => {
   try {
     const response = await fetch(
@@ -22,10 +23,12 @@ export const registerUser = async (username, password) => {
     //object with data that contains a token which is needed to make other request to the API
     //deconstruction of the object data same as token = response.data.token
     //token used as a key to access other things in the API (bc we must be a register user to utilize the API)
+    // this is saying const token = response.data.token
     const {
       data: { token },
     } = await response.json();
     return token;
+    console.log("myresponse data", token);
   } catch (error) {
     console.error(error);
   }
@@ -44,7 +47,7 @@ export const fetchMe = async (token) => {
         },
       }
     );
-    const data = await response.json();
+    const { data } = await response.json();
     return data;
   } catch (error) {
     console.error(error);

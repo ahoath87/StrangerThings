@@ -10,7 +10,7 @@ export async function getAllPosts() {
         data: { posts },
       },
     } = await axios.get(`${BASE}/posts`);
-    console.log(posts);
+    //console.log(posts);
     return posts;
   } catch (error) {
     throw error;

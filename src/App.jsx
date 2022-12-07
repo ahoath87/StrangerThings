@@ -40,6 +40,7 @@ getMe()
     <div className="App">Stranger's Things
   
   <Posts allPosts={allPosts} />
+  <h1>name here </h1>
   <Register />
   </div>)
 };
