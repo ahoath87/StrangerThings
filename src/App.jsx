@@ -3,13 +3,20 @@ import "./App.css";
 import  Posts  from "./components/Posts";
  import {getAllPosts} from "./api/posts"
  import Register from "./components/Register";
- import { fetchMe } from "./api/auth";
+ import { fetchMe, loginUser } from "./api/auth";
+ import Login from "./components/Login";
+ import Header from "./components/LogOut";
+//  import LogOutButton from "."
+//  import LogOut from "./components/LogOut";
+ 
 
 
 
 function App() {
   const [allPosts, setAllPosts] = useState([]);
-  const [token, setToken] = useState(localStorage.getItem("token"))
+  const [token, setToken] = useState(localStorage.getItem("token"));
+  const [user, setUser] = useState({});
+  const [isLoggedIn, setIsLoggedIn] =useState(false);
  //created state to grab token
 //retrieving API data from getAllPosts and setting state 
   useEffect(() => {
@@ -28,21 +35,37 @@ function App() {
   // takes the list which is the dependency array and verify is again your list of missing books
   //it could also be anything you want but it must be related to the dependency array
 
-  useEffect(() =>{
-const getMe = async () => {
-  const data = await fetchMe(token)
-  console.log(data);
-};
-getMe()
-  }, []);
+useEffect(() =>{
+  const getMe = async () => {
+    const data = await fetchMe(token);
+    setUser(data);
+    
+    console.log("this is user", data)
+  };
+  if (token) { 
+    getMe(); 
+  }
   
+    }, [token]);
+
+
+
+ console.log("in app isloggedin", isLoggedIn)
+
+
   return (
-    <div className="App">Stranger's Things
-  
+    <div className="App">AppStuff
+    <Header isLoggedIn={isLoggedIn} />
   <Posts allPosts={allPosts} />
-  <h1>name here </h1>
-  <Register />
+  <h1>{user?.username} </h1>
+  <Register setToken={setToken} />
+  <Login setToken={setToken}
+  setUser={setUser}
+  setIsLoggedIn={setIsLoggedIn}
+  isLoggedIn={isLoggedIn}/>
   </div>)
+ 
+  
 };
 
 
