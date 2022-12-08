@@ -13,13 +13,11 @@
 // }
 {/* psuedo-code: if isLoggedIn is true then make the button a logout button and 
 when clicked delete our token from storage and re-render as a login <button></button> */}
-{/* else if isLoggedIn is false make the button a loging button that redirects to login page */}
-const LogButton = ({content, action, nameOfClass, isLoggedIn}) => {
-
+{/* else if isLoggedIn is false make the button a login button that redirects to login page */}
+const LogButton = ({content, action}) => {
+   
     return(
-    <button> className={nameOfClass} onClick={action} {content}
-
-    </button>
+    <button onClick={action}> {content} </button>
  )}
 
 

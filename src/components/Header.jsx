@@ -5,6 +5,7 @@ import LogButton from "./LogOut"
 
 const Header = ({isLoggedIn}) => {
 //   let activeClassName ="current"
+console.log("is header logged in", isLoggedIn)
     return(
     <div id="header">  
         <header>
@@ -19,9 +20,9 @@ const Header = ({isLoggedIn}) => {
 when clicked delete our token from storage and re-render as a login <button></button> */}
 {/* else if isLoggedIn is false make the button a loging button that redirects to login page */}
             <LogButton 
-            nameOfClass={'create-button'} 
-            action={() => console.log("hi there")} 
-            content={'My Log button'}/>
+            isLoggedIn={isLoggedIn}
+            content={ isLoggedIn ? 'Log Out' : 'Log In'}
+            />
         </div>
     </header>
 </div>)

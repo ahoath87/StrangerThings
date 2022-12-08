@@ -5,7 +5,7 @@ import  Posts  from "./components/Posts";
  import Register from "./components/Register";
  import { fetchMe, loginUser } from "./api/auth";
  import Login from "./components/Login";
- import Header from "./components/LogOut";
+ import Header from "./components/Header";
 //  import LogOutButton from "."
 //  import LogOut from "./components/LogOut";
  
