@@ -13,11 +13,20 @@ export async function getAllPosts() {
     //console.log(posts);
     return posts;
   } catch (error) {
-    throw error;
+    console.error(error);
   }
 }
 
-export const createNewPost = async ({ post, token }) => {
+export const createNewPost = async (
+  // token,
+  title,
+  description,
+  location,
+  price
+) => {
+  console.log({ title, description, location, price });
+  const token = localStorage.token;
+  console.log("thisi is token", token);
   try {
     const response = await fetch(`${BASE}/posts`, {
       method: "POST",
@@ -27,14 +36,23 @@ export const createNewPost = async ({ post, token }) => {
       },
       body: JSON.stringify({
         post: {
-          title: "My favorite stuffed animal",
-          description:
-            "This is a pooh doll from 1973. It has been carefully taken care of since I first got it.",
-          price: "$480.00",
-          willDeliver: true,
+          title: title,
+          description: description,
+          price: price,
+          location: location,
         },
       }),
     });
+
+    const result = await response.json();
+    console.log(result);
+    // const {
+    //   data: {
+    //     data: { post },
+    //   },
+    // } = await response.json();
+    console.log("this is posts in create");
+    return;
   } catch (error) {
     throw error;
   }

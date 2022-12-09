@@ -42,7 +42,7 @@ const Register = ({setToken}) => {
             }
         }
             }}>
-             
+             <h2>Registration</h2>
             <input id="User" value={username} type='text' placeholder="username" onChange={(e)=>setUsername(e.target.value)}></input>
             <input id="Pass" value={password} type='password' placeholder='password' onChange={(e)=>setPassword(e.target.value)}></input>
             <button id="submitten" type="submit">submit</button>
