@@ -4,7 +4,7 @@ import LogButton from "./LogButton";
 // import { storeCurrentUser } from "../auth";
 import "./Login.css";
 
-const Login = ({ setToken, setIsLoggedIn, isLoggedIn }) => {
+const Login = ({ setToken, setIsLoggedIn, isLoggedIn, user }) => {
   //   console.log("looog", isLoggedIn);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -38,6 +38,7 @@ const Login = ({ setToken, setIsLoggedIn, isLoggedIn }) => {
     <div>
       <form>
         <h2>I am Login Below</h2>
+        <h1>Welcome {user?.username}!</h1>
         <input
           value={username}
           minLength={5}

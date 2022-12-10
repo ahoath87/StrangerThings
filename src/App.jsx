@@ -1,5 +1,6 @@
 import "./App.css";
 import { React, useState, useEffect } from "react";
+import { Route, Routes } from "react-router-dom";
 import Posts from "./components/Posts";
 import { getAllPosts } from "./api/posts";
 import Register from "./components/Register";
@@ -7,6 +8,8 @@ import { fetchMe, loginUser } from "./api/auth";
 import Login from "./components/Login";
 import Header from "./components/Header";
 import PostForm from "./components/PostForm";
+import Profile from "./components/Profile";
+import Home from "./components/Home";
 //  import LogOutButton from "."
 //  import LogOut from "./components/LogOut";
 
@@ -50,23 +53,60 @@ function App() {
     <div className="App">
       AppStuff
       <Header isLoggedIn={isLoggedIn} />
-      <PostForm
-        setAllPosts={setAllPosts}
-        token={token}
-        allPosts={allPosts}
-        getAllPosts={getAllPosts}
-      />
-      <h1>{user?.username} </h1>
-      <Register setToken={setToken} />
-      <Login
-        setToken={setToken}
-        setUser={setUser}
-        setIsLoggedIn={setIsLoggedIn}
-        isLoggedIn={isLoggedIn}
-      />
-      <Posts token={token} allPosts={allPosts} setAllPosts={setAllPosts} />
+      <Routes>
+        <Route path="/" element={<Home />}></Route>
+        <Route
+          path="/register"
+          element={<Register user={user} setToken={setToken} />}
+        ></Route>
+        <Route path="/profile" element={<Profile />}></Route>
+        <Route
+          path="/login"
+          element={
+            <Login
+              user={user}
+              setToken={setToken}
+              setUser={setUser}
+              setIsLoggedIn={setIsLoggedIn}
+              isLoggedIn={isLoggedIn}
+            />
+          }
+        ></Route>
+        <Route
+          path="/posts"
+          element={
+            <Posts
+              token={token}
+              allPosts={allPosts}
+              setAllPosts={setAllPosts}
+              getAllPosts={getAllPosts}
+            />
+          }
+        ></Route>
+      </Routes>
     </div>
   );
+}
+
+{
+  /* <Home />
+<Profile />
+<PostForm
+  setAllPosts={setAllPosts}
+  token={token}
+  allPosts={allPosts}
+  getAllPosts={getAllPosts}
+/>
+<h1>{user?.username} </h1>
+<Register setToken={setToken} />
+<Login
+  setToken={setToken}
+  setUser={setUser}
+  setIsLoggedIn={setIsLoggedIn}
+  isLoggedIn={isLoggedIn}
+/>
+<Posts token={token} allPosts={allPosts} setAllPosts={setAllPosts} />
+</div> */
 }
 
 export default App;

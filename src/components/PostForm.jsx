@@ -25,10 +25,9 @@ const PostForm = ({ token, setAllPosts, allPosts }) => {
       console.error(error);
     }
   };
-  console.log({ newTitle, newDescription, newPrice, newLocation });
+  //console.log({ newTitle, newDescription, newPrice, newLocation });
   return (
     <div id="post-form">
-      {" "}
       THIS IS POST FORM
       <form onSubmit={submitHandler}>
         <input

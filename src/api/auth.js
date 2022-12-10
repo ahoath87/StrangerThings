@@ -1,24 +1,23 @@
-const cohort = "2211-FTB-WEB-FT";
+//const cohort = "2211-FTB-ET-WEB-FT";
+import { BASE_URL } from "../components/BASE_URL";
+//const BASE = "https://strangers-things.herokuapp.com/api/2211-FTB-ET-WEB-FT";
 
 //registering a user to our API
 //sends response and shows a token in an object
 export const registerUser = async (username, password) => {
   try {
-    const response = await fetch(
-      `https://strangers-things.herokuapp.com/api/${cohort}/users/register/`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+    const response = await fetch(`${BASE_URL}/users/register/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        user: {
+          username,
+          password,
         },
-        body: JSON.stringify({
-          user: {
-            username,
-            password,
-          },
-        }),
-      }
-    );
+      }),
+    });
     //object with data that contains a token which is needed to make other request to the API
     //deconstruction of the object data same as token = response.data.token
     //token used as a key to access other things in the API (bc we must be a register user to utilize the API)
@@ -38,15 +37,12 @@ export const registerUser = async (username, password) => {
 export const fetchMe = async (token) => {
   console.log("this is fetchme token", token);
   try {
-    const response = await fetch(
-      `https://strangers-things.herokuapp.com/api/${cohort}/users/me/`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    const response = await fetch(`${BASE_URL}/users/me`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
     const { data } = await response.json();
     return data;
   } catch (error) {
@@ -56,21 +52,18 @@ export const fetchMe = async (token) => {
 
 export const loginUser = async (username, password) => {
   try {
-    const response = await fetch(
-      `https://strangers-things.herokuapp.com/api/${cohort}/users/login`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+    const response = await fetch(`${BASE_URL}/users/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        user: {
+          username,
+          password,
         },
-        body: JSON.stringify({
-          user: {
-            username,
-            password,
-          },
-        }),
-      }
-    );
+      }),
+    });
     const {
       data: { token },
     } = await response.json();

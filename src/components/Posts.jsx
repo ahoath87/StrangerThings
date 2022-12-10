@@ -1,15 +1,24 @@
 import React from "react";
+import PostForm from "./PostForm";
 import "./Posts.css";
 // import { createNewPost} from "../api/posts";
 // import PostButtons from "./PostButton";
 // import postButtons from "./postButtons";
 
-const Posts = ({ allPosts }) => {
+const Posts = ({ allPosts, setAllPosts, token, getAllPosts }) => {
   //   const postToCreate ={newTitle, newDescription, newLocation, newPrice};
   // console.log("print out all", allPosts);
 
   return (
     <div className="user-posts">
+      <div>
+        <PostForm
+          setAllPosts={setAllPosts}
+          token={token}
+          allPosts={allPosts}
+          getAllPosts={getAllPosts}
+        />
+      </div>
       <h2>All Posts</h2>
 
       {allPosts.length ? (

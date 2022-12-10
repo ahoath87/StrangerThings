@@ -1,6 +1,5 @@
 import axios from "axios";
-
-const BASE = "https://strangers-things.herokuapp.com/api/2211-FTB-ET-WEB-FT";
+import { BASE_URL } from "../components/BASE_URL";
 
 export async function getAllPosts() {
   //object pulling an object pulling an object from API to get to posts
@@ -9,7 +8,7 @@ export async function getAllPosts() {
       data: {
         data: { posts },
       },
-    } = await axios.get(`${BASE}/posts`);
+    } = await axios.get(`${BASE_URL}/posts`);
     //console.log(posts);
     return posts;
   } catch (error) {
@@ -28,7 +27,7 @@ export const createNewPost = async (
   const token = localStorage.token;
   console.log("thisi is token", token);
   try {
-    const response = await fetch(`${BASE}/posts`, {
+    const response = await fetch(`${BASE_URL}/posts`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
