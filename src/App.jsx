@@ -7,9 +7,12 @@ import Register from "./components/Register";
 import { fetchMe, loginUser } from "./api/auth";
 import Login from "./components/Login";
 import Header from "./components/Header";
-import PostForm from "./components/PostForm";
+// import PostForm from "./components/PostForm";
 import Profile from "./components/Profile";
 import Home from "./components/Home";
+import UpdatePostForm from "./components/UpdatePostForm";
+import PostForm from "./components/PostForm";
+import MessageForm from "./components/MessageForm";
 //  import LogOutButton from "."
 //  import LogOut from "./components/LogOut";
 
@@ -18,6 +21,8 @@ function App() {
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [user, setUser] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [postToEdit, setPostToEdit] = useState({});
+  const [isRegistered, setIsRegistered] = useState(false);
   //created state to grab token
   //retrieving API data from getAllPosts and setting state
   useEffect(() => {
@@ -40,32 +45,54 @@ function App() {
       const data = await fetchMe(token);
       setUser(data);
 
-      // console.log("this is user", data);
+      console.log("this is user", token);
     };
     if (token) {
       getMe();
     }
   }, [token]);
 
-  // console.log("in app isloggedin", isLoggedIn);
+  console.log("in app isloggedin", isLoggedIn);
 
   return (
     <div className="App">
-      AppStuff
-      <Header isLoggedIn={isLoggedIn} />
+      <Header isLoggedIn={isLoggedIn} isRegistered={isRegistered} />
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route
           path="/register"
-          element={<Register user={user} setToken={setToken} />}
+          element={
+            <Register
+              setIsRegistered={setIsRegistered}
+              isRegistered={isRegistered}
+              user={user}
+              setToken={setToken}
+            />
+          }
         ></Route>
-        <Route path="/profile" element={<Profile />}></Route>
+        <Route
+          path="/profile"
+          element={
+            <Profile
+              token={token}
+              postToEdit={setPostToEdit}
+              setAllPosts={setAllPosts}
+              allPosts={allPosts}
+              setPostToEdit={setPostToEdit}
+              user={user}
+              setUser={setUser}
+            />
+          }
+        ></Route>
         <Route
           path="/login"
           element={
             <Login
               user={user}
+              setIsRegistered={setIsRegistered}
+              isRegistered={isRegistered}
               setToken={setToken}
+              // token={token}
               setUser={setUser}
               setIsLoggedIn={setIsLoggedIn}
               isLoggedIn={isLoggedIn}
@@ -80,33 +107,39 @@ function App() {
               allPosts={allPosts}
               setAllPosts={setAllPosts}
               getAllPosts={getAllPosts}
+              setPostToEdit={setPostToEdit}
+              postToEdit={postToEdit}
+            />
+          }
+        ></Route>
+        <Route
+          path="/postForm"
+          element={
+            <PostForm
+              setAllPosts={setAllPosts}
+              token={token}
+              allPosts={allPosts}
+              getAllPosts={getAllPosts}
+            />
+          }
+        ></Route>
+        <Route path="/messageForm" element={<MessageForm />}></Route>
+
+        <Route
+          path="/updatePostForm"
+          element={
+            <UpdatePostForm
+              token={token}
+              setAllPosts={setAllPosts}
+              allPosts={allPosts}
+              postToEdit={postToEdit}
+              setPostToEdit={setPostToEdit}
             />
           }
         ></Route>
       </Routes>
     </div>
   );
-}
-
-{
-  /* <Home />
-<Profile />
-<PostForm
-  setAllPosts={setAllPosts}
-  token={token}
-  allPosts={allPosts}
-  getAllPosts={getAllPosts}
-/>
-<h1>{user?.username} </h1>
-<Register setToken={setToken} />
-<Login
-  setToken={setToken}
-  setUser={setUser}
-  setIsLoggedIn={setIsLoggedIn}
-  isLoggedIn={isLoggedIn}
-/>
-<Posts token={token} allPosts={allPosts} setAllPosts={setAllPosts} />
-</div> */
 }
 
 export default App;

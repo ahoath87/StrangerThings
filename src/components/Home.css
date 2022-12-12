@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap');
+
+
+#home{
+    padding-top: 6em;
+    font-size: 50px;
+    font-family: 'Libre Baskerville', serif;
+}
+#home-buttons{
+    margin-top: 2em;
+    display: flex;
+    flex-direction: column;
+    margin-right: 11em;
+    margin-left: 11em;
+
+}

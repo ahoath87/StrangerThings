@@ -1,10 +1,19 @@
 import { React, useState } from "react";
 import { loginUser } from "../api/auth";
+import { Link } from "react-router-dom";
 import LogButton from "./LogButton";
 // import { storeCurrentUser } from "../auth";
 import "./Login.css";
 
-const Login = ({ setToken, setIsLoggedIn, isLoggedIn, user }) => {
+const Login = ({
+  setToken,
+  setUser,
+  setIsLoggedIn,
+  isLoggedIn,
+  isRegistered,
+  setIsRegistered,
+  user,
+}) => {
   //   console.log("looog", isLoggedIn);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -26,7 +35,9 @@ const Login = ({ setToken, setIsLoggedIn, isLoggedIn, user }) => {
   const logOutUser = async (e) => {
     try {
       e.preventDefault();
-      isLoggedIn
+      // setUsername(" ");
+      // setPassword(" ");
+      isLoggedIn || isRegistered
         ? localStorage.removeItem("token")
         : console.log("cant log ya out");
     } catch (error) {
@@ -35,10 +46,10 @@ const Login = ({ setToken, setIsLoggedIn, isLoggedIn, user }) => {
   };
 
   return (
-    <div>
+    <div id="login-form">
       <form>
-        <h2>I am Login Below</h2>
-        <h1>Welcome {user?.username}!</h1>
+        <h2> Login Below</h2>
+        {/* <h1>Welcome {user?.username}!</h1> */}
         <input
           value={username}
           minLength={5}
@@ -54,11 +65,14 @@ const Login = ({ setToken, setIsLoggedIn, isLoggedIn, user }) => {
           onChange={(e) => setPassword(e.target.value)}
         ></input>
       </form>
+
       <LogButton
         isLoggedIn={isLoggedIn}
+        isRegistered={isRegistered}
         content={isLoggedIn ? "Log Out" : "Log In"}
         action={!isLoggedIn ? logInUser : logOutUser}
       />
+      <Link to="/register">Don't have an accout? Sign Up</Link>
     </div>
   );
 };

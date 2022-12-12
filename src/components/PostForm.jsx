@@ -1,6 +1,7 @@
 import { React, useState } from "react";
+
 import "./PostForm.css";
-import { createNewPost } from "../api/posts";
+import { createNewPost, updatePost } from "../api/posts";
 
 //I need for things to be triggered onsbumit = createNewPosts
 
@@ -14,12 +15,13 @@ const PostForm = ({ token, setAllPosts, allPosts }) => {
     try {
       e.preventDefault();
       const newPost = await createNewPost(
+        // token,
         newTitle,
         newDescription,
         newPrice,
         newLocation
       );
-      console.log(newPost);
+      console.log(token);
       setAllPosts([newPost, ...allPosts]);
     } catch (error) {
       console.error(error);
@@ -28,7 +30,7 @@ const PostForm = ({ token, setAllPosts, allPosts }) => {
   //console.log({ newTitle, newDescription, newPrice, newLocation });
   return (
     <div id="post-form">
-      THIS IS POST FORM
+      New post Form
       <form onSubmit={submitHandler}>
         <input
           value={newTitle}

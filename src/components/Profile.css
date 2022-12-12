@@ -1,33 +1,36 @@
 @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap');
 
-h2{
-  font-size: 60px;
+
+
+*{
+    color: black;  
 }
-.user-posts-inpost {
-    padding: 1em;
+#my-data{
     font-family: 'Libre Baskerville', serif;
-    color: black;
-    
-  }
-  #create-button{
-    margin-bottom: 2em;
-  }
-  .post-inpost{
+}
+.userMessage{
     padding: 1em;
     padding-bottom: .5em;
     box-sizing: border-box;
     box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2);
     border-bottom: 1em black;
     padding-left: 3em;
-    padding-bottom: 2em;
     margin-bottom: 1em;
-    font-family: 'Libre Baskerville', serif;
-  }
-  
-  .user-posts h2 {
-    margin-bottom: .5em;
+}
+
+.userPost{
+    padding: 1em;
     padding-bottom: .5em;
-    border-bottom: 1px solid grey;
-  }
-  
- 
+    box-sizing: border-box;
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2);
+    border-bottom: 1em black;
+    padding-left: 3em;
+   
+   
+}
+#link-to-update{
+    text-decoration: none;
+}
+#title.profile.post{
+   padding-right: 10em;
+}

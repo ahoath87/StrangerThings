@@ -1,5 +1,6 @@
 import { React, useState } from "react";
 import { registerUser } from "../api/auth";
+import { Link } from "react-router-dom";
 
 //make a request to stranger things API
 // had to pass setToken to Register or else it will not pull the new state of token
@@ -7,14 +8,14 @@ import { registerUser } from "../api/auth";
 
 //if token, do this
 // if no token, do this...
-const Register = ({ setToken, user }) => {
+const Register = ({ setToken, isRegistered, setIsRegistered, user }) => {
   // hit sumit - run register user which will pull out a token..
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  if (username.length > 2) {
+  if (username.length > 5) {
     console.log(`username length is ${username.length}`);
   }
-  if (password.length > 2) {
+  if (password.length > 5) {
     console.log(`password length is ${password.length}`);
   }
   {
@@ -22,7 +23,7 @@ const Register = ({ setToken, user }) => {
       <div>
         <form
           onSubmit={async (e) => {
-            if (password.length > 2 && username.length > 2) {
+            if (password.length > 5 && username.length > 5) {
               try {
                 e.preventDefault();
                 //changed the response to token as it was changed form the auth.js
@@ -35,6 +36,7 @@ const Register = ({ setToken, user }) => {
                 console.log("this is token in register", token);
                 setUsername("");
                 setPassword("");
+                setIsRegistered(true);
               } catch (error) {
                 console.error(error);
               }
@@ -42,7 +44,7 @@ const Register = ({ setToken, user }) => {
           }}
         >
           <h2>Registration</h2>
-          <h1>Welcome {user?.username}!</h1>
+          {/* <h1>Welcome {user?.username}!</h1> */}
           <input
             id="User"
             value={username}
